@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Album, List } from '../album';
-import { ALBUM_LISTS } from "../mock-albums";
+import { AlbumService } from '../album.service';
 
 @Component({
     selector: 'app-album-details',
@@ -12,23 +12,29 @@ export class AlbumDetailsComponent implements OnInit {
     // Classe Input permet de récupérer les data de l'enfant
     // album est liée à une entrée [album] du parent dans le sélecteur 
     @Input() album!: Album;
-    albumList: string[] = [];
-    listSelected!: List;
+    albumList: string[] | undefined= [];  // tableau qui stocke la liste des chansons
+    constructor(
+        private albumService : AlbumService
+    ) {}
 
     @Output() onPlay: EventEmitter<Album> = new EventEmitter();
 
-    constructor() { }
-
-    ngOnInit() {
+    ngOnInit(): void {
         console.log(this.album); // pour l'instant c'est undefined.... C'est normal
     }
 
-    ngOnChanges() {
-        ALBUM_LISTS.forEach(listSelected => {
-            if (listSelected.id === this.album.id) {
-                this.albumList = listSelected.list
-            }
-        });
+    ngOnChanges(): void {
+        // récupérer la liste des chansons
+        // ALBUM_LISTS.forEach(listSelected => {
+        //     if (listSelected.id === this.album.id) {
+        //         this.albumList = listSelected.list
+        //     }
+        // });
+        //  Deuxième méthode
+        if (this.album) {
+            this.albumList = this.albumService.getAlbumList(this.album.id)?.list;
+            console.log(this.albumList)
+        }
     }
 
     play(album: Album) {

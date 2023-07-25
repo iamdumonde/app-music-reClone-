@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // Importez la définition de la classe et les albums
 import { Album } from '../album';
+import { AlbumService } from '../album.service';
 import { ALBUMS } from '../mock-albums';
 
 @Component({
@@ -11,24 +12,33 @@ import { ALBUMS } from '../mock-albums';
 })
 export class AlbumsComponent implements OnInit {
     titlePage: string = "Page principale Albums Music";
-    albums: Album[] = ALBUMS;
-    selectedAlbum!: Album;
-    constructor() { }
-    ngOnInit() {
+    albums: Album[] | undefined = undefined;
+    status: string | null = null;
 
+    selectedAlbum!: Album;  // je suis sur qu'une valeur sera passé au moment opportun
+    constructor(
+        private albumServivce: AlbumService
+    ) {
+        console.log(`${this.albumServivce.count()} albums trouvés`);
+        
     }
+
+    ngOnInit(): void {
+        this.albums = this.albumServivce.getAlbums();
+    }
+
     onSelect(album: Album): void{
         this.selectedAlbum = album;
     }
 
-    playParent(event: Album) {
-        for (let i = 0; i < this.albums.length; i++) {
-            if (this.albums[i].id === event.id) {
-                this.albums[i].status = "on"
-            }else {
-                this.albums[i].status = "off"
-            }
-        }
-
+    playParent($event: Album) {
+        // for (let i = 0; i < this.albums.length; i++) {
+        //     if (this.albums[i].id === event.id) {
+        //         this.albums[i].status = "on"
+        //     }else {
+        //         this.albums[i].status = "off"
+        //     }
+        // }
+        this.status = $event.id;
     }
 }

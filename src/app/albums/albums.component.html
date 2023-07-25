@@ -34,6 +34,7 @@
         <div class="card my-3" *ngFor="let album of albums">
             <div class="card-header">
                 Pop
+                <small class="btn btn-outline-dark bg-primary text-light" *ngIf="status === album.id">En cours de lecture ▶</small>
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ album.title }}</h5>
@@ -47,7 +48,6 @@
                 <img class="glyph-icon" src="./assets/svg/si-glyph-timer.svg" />
                 <small>{{ album.duration }} min</small>
                 <a href="#" class="btn btn-outline-dark bg-secondary text-light m-3" style="width: 12%" (click)="onSelect(album)">Details</a>
-                <small class="btn btn-outline-dark bg-primary text-light" *ngIf="album.status === 'on'">En cours de lecture ▶</small>
             </div><!-- .card -->
             </div>
 

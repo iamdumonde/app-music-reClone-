@@ -1,4 +1,4 @@
-export class Album {
+export interface Album {
     "id": string;
     "ref": string;
     "name": string;
@@ -11,7 +11,7 @@ export class Album {
     "like"?: string;
     "note": Array<number>
 }
-export class List {
+export interface List {
     "id" : string;
     "list" : Array<string>;
 }
