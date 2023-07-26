@@ -18,13 +18,9 @@
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0 d-flex">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success m-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <app-search (searchAlbums)="search($event)"></app-search>
     </div>
 </nav>
-<app-search></app-search>
 <div class="row content">
     <div class="col-sm-4 video">
         <!-- onplay méthode enfant et playParent méthode parent -->
@@ -33,9 +29,9 @@
     <div *ngIf="albums" class="col-sm-8 music">
         <h1>{{ titlePage }}</h1>
         <div class="card my-3" *ngFor="let album of albums; let i = index;">
-            <div class="card-header d-flex justify-content-between pop">
+            <div class="card-header d-flex justify-content-between">
                 <p class="m-0">{{i + 1}} Pop</p>
-                <small class= "fas fa-music" *ngIf="status === album.id"></small>
+                <small class= "fas fa-music pop" *ngIf="status === album.id"></small>
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ album.title }}</h5>
@@ -57,13 +53,11 @@
 </div>
 <style>
     .pop {
-        animation-name: anim;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
+       animation: anim 2s infinite;
     }
 
     @keyframes anim {
-        0% {}
-        100% {}
+        0% {transform: scale(0.2);}
+        100% {transform: scale(1);}
     }
 </style>
