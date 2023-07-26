@@ -8,4 +8,15 @@ Le tableau sera classé:
 Sinon, le tableau rest inchangé.
 ## Exemple
 ` ` `js
-let arr = 
+
+*ngFor
+Lorsque nous utilisons la directive *ngFor, Angular crée un ensemble de variables pour chaque itération. Les variables créés sont: 
+-**index**: variable qui stock l'indice de l'élément actuel
+-**first**: variable booléenne qui indique si l'élément est le premier dans la liste
+-**last** : variable booléenne qui indique si l'élément est le dernier dans la liste
+-**even**: variable booléenne qui indique si l'indice de l'élément actuel est pair
+-**odd**: variable qui indique si l'indice de l'élément actuek est impair.
+
+# Formulaires Angular
+
+Un formulaire avec Angular se gère suivant deux approches: Les réactifs (en: reactive forms) et les modèles (en: template-driven forms)

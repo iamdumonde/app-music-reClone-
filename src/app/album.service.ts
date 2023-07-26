@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Album, List } from './album';
+import { Album, List, SortAlbumCallback } from './album';
 import { ALBUMS, ALBUM_LISTS } from './mock-albums';
 
 // Une classe injectable est un service et peut être recevoir d'autre(s) service(s) 
@@ -47,10 +47,20 @@ export class AlbumService {
         return this._albums.length;
     }
 
-    paginate(start: number, end: number): Album[] {
-        return this._albums
-            .slice(start, end)
-            .sort((a: Album, b: Album) => b.duration - a.duration);
-
+    order(callback: SortAlbumCallback) {
+        this._albums.sort((a: Album ,b: Album) => b.duration - a.duration)
+        return this; // retourne le service pour permettre le chainage de méthodes
     }
+
+    limit (start: number, end: number): AlbumService {
+        this._albums = this._albums.slice(start, end)
+        return this;
+    }
+
+    // paginate(start: number, end: number): Album[] {
+    //     return this._albums
+    //         .slice(start, end)
+    //         .sort((a: Album, b: Album) => b.duration - a.duration);
+
+    // }
 }
