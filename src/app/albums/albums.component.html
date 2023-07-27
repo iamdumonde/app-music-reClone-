@@ -1,68 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-    <p class="m-0">app-music</p>
-    <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                    <span class="sr-only"></span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Se connecter
-                    <span class="sr-only"></span>
-                </a>
-            </li>
-        </ul>
-        <app-search (searchAlbums)="search($event)"></app-search>
-    </div>
-</nav>
-<div class="row content">
-    <div class="col-sm-4 video">
-        <!-- onplay méthode enfant et playParent méthode parent -->
-        <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>
-    </div>
-    <div *ngIf="albums" class="col-sm-8 music">
-        <h1>{{ titlePage }}</h1>
-        <ng-container *ngIf="albums.length; else notfound">
-            <div class="card my-3" *ngFor="let album of albums; let i = index;">
-                <div class="card-header d-flex justify-content-between">
-                    <p class="m-0">{{i + 1}} Pop</p>
-                    <small class="fas fa-music pop" *ngIf="status === album.id"></small>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ album.title }}</h5>
-                    <p class="card-text">{{ album.description }}</p>
-                    <a class="btn btn-outline-dark m-2 bg-info text-light" href="#" role="button"
-                        *ngFor="let tag of album.tags">{{ tag
-                        }}</a><br>
-                    <a class="btn btn-outline-dark" href="#" role="button">fr</a>
-    
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
-                    <small>{{ album.like }}</small>
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-timer.svg" />
-                    <small>{{ album.duration }} min</small>
-                    <a href="#" class="btn btn-outline-dark bg-secondary text-light m-3" style="width: 12%"
-                        (click)="onSelect(album)">Details</a>
-    
-                </div><!-- .card -->
-            </div>
-        </ng-container>
-        <ng-template #notfound>
-            <div class="card">
-                <div class="card-body text-center">
-                    <p class="card-text fs-4">Aucun album trouvé</p>
-                </div>
-            </div>
 
-        </ng-template>
-       
-
-    </div><!-- .music -->
+<div [@fadeInAnimation]>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <app-search (searchAlbums)="search($event)" style="width: 100%;"></app-search>
+    </nav>
+    <div class="row content">
+        <div class="col-sm-4 video">
+            <!-- onplay méthode enfant et playParent méthode parent -->
+            <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>
+        </div>
+        <div *ngIf="albums" class="col-sm-8 music">
+            <h1>{{ titlePage }}</h1>
+            <ng-container *ngIf="albums.length; else notfound">
+                <div class="card my-3" *ngFor="let album of albums; let i = index;">
+                    <div class="card-header d-flex justify-content-between">
+                        <p class="m-0">{{i + 1}} Pop</p>
+                        <small class="fas fa-music pop" *ngIf="status === album.id"></small>
+                    </div>
+                    <div class="card-body">
+                        <a class="text-info" routerLink="/album/{{album.id}}">{{album.title}}</a>
+                        <p class="card-text">{{ album.description }}</p>
+                        <a class="btn btn-outline-dark m-2 bg-info text-light" href="#" role="button"
+                            *ngFor="let tag of album.tags">{{ tag
+                            }}</a><br>
+                        <a class="btn btn-outline-dark" href="#" role="button">fr</a>
+    
+                        <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
+                        <small>{{ album.like }}</small>
+                        <img class="glyph-icon" src="./assets/svg/si-glyph-timer.svg" />
+                        <small>{{ album.duration }} min</small>
+                        <button class="btn btn-outline-dark bg-secondary text-light m-3" style="width: 12%"
+                            (click)="onSelect(album)">Details</button>
+    
+                    </div><!-- .card -->
+                </div>
+            </ng-container>
+            <ng-template #notfound>
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p class="card-text fs-4">Aucun album trouvé</p>
+                    </div>
+                </div>
+    
+            </ng-template>
+    
+    
+        </div><!-- .music -->
+    </div>
 </div>
 <style>
     .pop {

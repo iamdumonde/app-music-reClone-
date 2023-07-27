@@ -3,11 +3,13 @@ import { Component, OnInit, Output } from '@angular/core';
 // Importez la définition de la classe et les albums
 import { Album } from '../album';
 import { AlbumService } from '../album.service';
+import { fadeInAnimation } from '../animation.module';
 
 @Component({
     selector: 'app-albums',
     templateUrl: './albums.component.html',
-    styleUrls: ['./albums.component.css']
+    styleUrls: ['./albums.component.css'],
+    animations: [fadeInAnimation]
 })
 export class AlbumsComponent implements OnInit {
     titlePage: string = "Page principale Albums Music";

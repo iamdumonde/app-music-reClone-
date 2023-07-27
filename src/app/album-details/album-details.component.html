@@ -1,10 +1,10 @@
-<div class="col-sm-4 video" *ngIf=" album" style="width: 100%;">
+<div [@fadeInAnimation] class="col-sm-4 video" *ngIf=" album" style="width: 100%;">
     <div class="card">
         <img class="card-img-top" src="./assets/location.jpg" alt="Group Music">
         <div class="card-body">
             <h5 class="card-title">{{ album.title }}</h5>
             <p class="card-text">{{ album.name }}</p>
-            <a href="#" class="btn btn-primary" (click)="play(album)">Play >> </a>
+            <a class="btn btn-primary" (click)="play(album)">Play >> </a>
         </div>
         <ul class="list-group">
             <li *ngFor="let list of albumList " class="list-group-item">{{ list }}</li>
