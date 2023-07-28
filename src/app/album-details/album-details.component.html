@@ -4,7 +4,8 @@
         <div class="card-body">
             <h5 class="card-title">{{ album.title }}</h5>
             <p class="card-text">{{ album.name }}</p>
-            <a class="btn btn-primary" (click)="play(album)">Play >> </a>
+            <a class="btn text-light m-3" style="background-color: purple;" (click)="play(album)">Play <i class="fas fa-play-circle"></i></a>
+            <a class="btn text-light" style="background-color: purple;">Aléatoire <i class="fas fa-random"></i></a>
         </div>
         <ul class="list-group">
             <li *ngFor="let list of albumList " class="list-group-item">{{ list }}</li>

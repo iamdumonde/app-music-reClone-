@@ -43,4 +43,10 @@ export class AlbumDetailsComponent implements OnInit {
         this.onPlay.emit(album); // émettre un album vers le parent
     }
 
+    isOpen = true;
+
+    toggle() {
+        this.isOpen = !this.isOpen;
+    }
+
 }

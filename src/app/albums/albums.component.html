@@ -10,6 +10,8 @@
         </div>
         <div *ngIf="albums" class="col-sm-8 music">
             <h1>{{ titlePage }}</h1>
+            <!-- Pagination -->
+            <app-paginate></app-paginate>
             <ng-container *ngIf="albums.length; else notfound">
                 <div class="card my-3" *ngFor="let album of albums; let i = index;">
                     <div class="card-header d-flex justify-content-between">
@@ -19,8 +21,8 @@
                     <div class="card-body">
                         <a class="text-info" routerLink="/album/{{album.id}}">{{album.title}}</a>
                         <p class="card-text">{{ album.description }}</p>
-                        <a class="btn btn-outline-dark m-2 bg-info text-light" href="#" role="button"
-                            *ngFor="let tag of album.tags">{{ tag
+                        <a class="btn btn-outline-dark m-2 text-light" href="#" role="button"
+                            *ngFor="let tag of album.tags" style="background-color: purple;">{{ tag
                             }}</a><br>
                         <a class="btn btn-outline-dark" href="#" role="button">fr</a>
     
