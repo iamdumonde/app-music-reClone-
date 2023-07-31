@@ -26,12 +26,12 @@ export class AlbumsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.albums = this.albumServivce
-            .order(function (a: Album, b: Album) {
-                return a.duration - b.duration
-            }) // ordonne les albums
-            .limit(0, 10) // renvoyer une sous-partie
-            .getAlbums() // récupère les albums
+        this.albums = this.albumServivce.paginate(0, this.albumServivce.paginateNumberPage())
+            // .order(function (a: Album, b: Album) {
+            //     return a.duration - b.duration
+            // }) // ordonne les albums
+            // .limit(0, this.albumServivce.paginateNumberPage()) // renvoyer une sous-partie
+            // .getAlbums() // récupère les albums
     }
 
     onSelect(album: Album): void {
@@ -54,6 +54,11 @@ export class AlbumsComponent implements OnInit {
         if ($event) {
             this.albums = $event
         }
+    }
+
+    onSetPaginate($event: {start: number, end: number}) {
+        // Récuperer les albums compris entre [start, end]
+        this.albums = this.albumServivce.paginate($event.start,  $event.end);
     }
 
 }

@@ -63,12 +63,10 @@ export class AlbumService {
         return this;
     }
 
-    // paginate(start: number, end: number): Album[] {
-    //     return this._albums
-    //         .slice(start, end)
-    //         .sort((a: Album, b: Album) => b.duration - a.duration);
+    paginate(start: number, end: number): Album[] {
+        return this.getAlbums().slice(start, end);
 
-    // }
+    }
 
     search(word: string): Album[] {
         return this._albums.filter(album => {return album.title
