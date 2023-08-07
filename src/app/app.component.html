@@ -14,6 +14,10 @@
         <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Se connecter</a>
       </li>
     </ul>
+    <div class="d-flex align-items-center">
+      <i class="fas fa-dot-circle"></i>
+      <p class="my-0 mx-2" *ngIf="count">Time: <span>{{ count }}</span></p>
+    </div>
   </nav>
   <!-- La partie où sera rendu tous les enfants de ce composant -->
   <router-outlet></router-outlet>
