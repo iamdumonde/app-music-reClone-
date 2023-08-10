@@ -47,7 +47,7 @@ export class AudioPlayerComponent implements OnInit {
             this.showplayer = false;
             this.albumService.switchOff(this.playedAlbum);
           }
-        }, 1000);
+        }, 1000 * 120);
       }
     }
     );
