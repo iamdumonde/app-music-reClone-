@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { count, interval, map, Observable } from 'rxjs'
+import { count, interval, map, Observable, take } from 'rxjs'
 
 
 @Component({
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
 
     ngOnInit(): void {
         this.timerObservable = interval(1000).pipe(
+            take(3600 * 12),
             map(num => {
                 const hours = Math.floor(num / 3600);
                 const minutes = Math.floor(num / 60);

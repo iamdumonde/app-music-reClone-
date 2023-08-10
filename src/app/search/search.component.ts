@@ -18,14 +18,19 @@ export class SearchComponent {
     }
 
     onSubmit(form: NgForm) {
-        const results: Album[] = this.albumService.search(form.value.word); // récupération d'une valeur spécifique
-       this.searchAlbums.emit(results);
+        const results = this.albumService.search(form.value.word).subscribe({
+            next: (alb: Album[]) => {
+                if (alb.length > 0) {
+                    this.searchAlbums.emit(alb)}
+                }
+        })  // récupération d'une valeur spécifique
         // console.log(form.value.word);
         
     }
 
     onChangesEmit($event: string) {
-        const results: Album[] = this.albumService.search(  $event); // récupération d'une valeur spécifique
-        this.searchAlbums.emit(results);
+        const results = this.albumService.search(  $event).subscribe((alb: Album[]) => {
+            this.searchAlbums.emit(alb);
+        }); // récupération d'une valeur spécifique
     }
 }

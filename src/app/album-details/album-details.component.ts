@@ -34,13 +34,13 @@ export class AlbumDetailsComponent implements OnInit {
         // });
         //  Deuxième méthode
         if (this.album) {
-            this.albumList = this.albumService.getAlbumList(this.album.id)?.list;
-            console.log(this.albumList)
+            this.albumService.getAlbumList(this.album.id)?.subscribe((songs) => {this.albumList = songs.list});
         }
     }
 
     play(album: Album) {
         this.onPlay.emit(album); // émettre un album vers le parent
+        this.albumService.switchOn(album);
     }
 
     isOpen = true;

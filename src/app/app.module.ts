@@ -15,6 +15,8 @@ import { OpenCloseComponent } from './open-close/open-close.component';
 import { FirstCompComponent } from './first-comp/first-comp.component';
 import { SecondCompComponent } from './second-comp/second-comp.component';
 import { PaginateComponent } from './paginate/paginate.component';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
+import { HttpClientModule } from "@angular/common/http";
 
 //  définition de la constante pour les routes
 /**
@@ -44,6 +46,7 @@ const albumsRoutes: Routes = [
     FirstCompComponent,
     SecondCompComponent,
     PaginateComponent,
+    AudioPlayerComponent,
 
   ],
   imports: [
@@ -54,6 +57,7 @@ const albumsRoutes: Routes = [
      * forRoot: méthode utilisée pour définir les routes à utilisés dans le module de routage.
      */
     RouterModule.forRoot(albumsRoutes), // chargement des routes dans l'application
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
