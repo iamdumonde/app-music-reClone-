@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { map, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Album, List } from './album';
+import * as _ from 'lodash';
+import { update } from 'lodash';
 
 // Une classe injectable est un service et peut être recevoir d'autre(s) service(s) 
 @Injectable({
@@ -24,11 +26,14 @@ export class AlbumService {
      * @returns Retourne la liste de tous les albums
      */
     getAlbums(): Observable<Album[]> {
+
         return this.http.get<Album[]>(this._albumsUrl).pipe(
-            // ordonner les albums par ordre de durée décroissante
-            map(albums => {
-                return albums.sort((a, b) => b.duration - a.duration);
-            })
+        /**Référence de la DB */
+        // const albumRef = ref(this.db, 'albums');
+        // return objectVal<Album[]>(albumRef).pipe(
+        //     map(albums => {
+        //         return albums.sort((a, b) => b.duration - a.duration);
+        //     })
         );
     }
 
@@ -40,7 +45,10 @@ export class AlbumService {
      */
     getAlbum(id: string): Observable<Album> | undefined {
         return this.http.get<Album>(this._albumsUrl + '/' + id).pipe(
-            map((album) => album)
+            // équivalent => http.get<Album>(this._albumUrl + "/albums/id")
+            // const albumRef = ref(this.db, `albums/${id}`);
+            // return objectVal<Album>(albumRef).pipe(
+            // map((album) => album)
         );
     }
 
@@ -52,6 +60,8 @@ export class AlbumService {
     getAlbumList(id: string): Observable<List> | undefined {
         // return this._albumList.find(list => list.id === id)
         return this.http.get<List>(this._albumListUrl + '/' + id);
+        // const albumListRef = ref(this.db, `albumList/${id}`);
+        // return objectVal<List>(albumListRef)
     }
 
     /**
@@ -60,6 +70,8 @@ export class AlbumService {
      */
     count(): Observable<number> {
         return this.http.get<Album[]>(this._albumsUrl).pipe(
+            // const albumsRef = ref(this.db, `albums`);
+            // return objectVal<Album>(albumsRef).pipe(
             map((album: Album[]) => album.length)
         )
     }
@@ -76,6 +88,16 @@ export class AlbumService {
 
     paginate(start: number, end: number): Observable<Album[]> {
         return this.http.get<Album[]>(this._albumsUrl).pipe(
+            // const albumsRef = ref(this.db, `albums`);
+            // return objectVal<Album[]>(albumsRef).pipe(
+            // map((albums: Album[]) => {
+            //     const res = _.values(albums)
+            //     console.log('sans lodash', albums);
+            //     console.log('avec lodash', res);
+
+            //     return res;
+            // }),
+
             map((albums) => albums.sort((a, b) => b.duration - a.duration)
                 .slice(start, end))
         );
@@ -90,6 +112,7 @@ export class AlbumService {
 
     search(word: string): Observable<Album[]> {
         return this.http.get<Album[]>(this._albumsUrl).pipe(
+            // return objectVal<Album[]>(ref(this.db, 'albums')).pipe(
             map((albums: Album[]) => {
                 // parcourir le tableau d'albums
                 return albums.filter(album => {
@@ -133,6 +156,8 @@ export class AlbumService {
     switchOn(album: Album) {
         album.status = "on";
         this.http.put<void>(this._albumsUrl + '/' + album.id, album)
+        // const albumRef = ref(this.sendCurrentNumberPage, "albums/" = album.id);
+        // update(ref(this.db, `albums/${allbum}`))
             .subscribe({
                 next: (e) => console.log(e),
                 error: (err) => console.warn(err),
@@ -144,7 +169,7 @@ export class AlbumService {
      * @param album: l'album dont le status doit passer à "off"
      */
     switchOff(album: Album): void {
-       album.status = 'off';
-       this.http.put<void>(this._albumsUrl ='/' + album.id, album).subscribe(() => {});
+        album.status = 'off';
+        this.http.put<void>(this._albumsUrl = '/' + album.id, album).subscribe(() => { });
     }
 }

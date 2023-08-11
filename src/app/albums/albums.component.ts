@@ -27,7 +27,9 @@ export class AlbumsComponent implements OnInit {
 
     ngOnInit(): void {
         this.albumServivce.paginate(0, this.albumServivce.paginateNumberPage()).subscribe({
-                next: (alb: Album[]) => {this.albums = alb},
+                next: (alb: Album[]) => {
+                    console.log('get<Album[]>', alb);
+                    this.albums = alb},
             })
         };
 

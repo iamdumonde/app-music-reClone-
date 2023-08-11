@@ -17,6 +17,7 @@ import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
+import { ShareModule } from './share/share.module';
 
 //  définition de la constante pour les routes
 /**
@@ -35,16 +36,18 @@ import { AdminModule } from './admin/admin.module';
     OpenCloseComponent,
     FirstCompComponent,
     SecondCompComponent,
-    PaginateComponent,
+    // PaginateComponent,
     AudioPlayerComponent,
 
   ],
   imports: [
     BrowserModule,
+    AdminModule,
+    AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule, AppRoutingModule,
-    AdminModule
+    HttpClientModule, 
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]
