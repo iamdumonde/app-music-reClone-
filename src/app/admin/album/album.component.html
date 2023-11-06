@@ -1,7 +1,10 @@
 <!-- <pre *ngIf="albums">{{ albums | json }}</pre> -->
-
+<p *ngIf="message" class="alert alert-success position-relative m-2">
+    {{message}}
+    <button (click)="message = undefined" class="btn-close position-absolute end-0"></button>
+</p>
 <p>
-    <button class="btn btn-dark">Add Album</button>
+    <button class="btn btn-dark" routerLink="/admin/add">Add Album</button>
 </p>
 <app-paginate (setPaginate)="onSetPaginate($event)"></app-paginate>
 <table class="table table-dark">

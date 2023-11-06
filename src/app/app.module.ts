@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from './app.component';
 import { AlbumsComponent } from './albums/albums.component';
@@ -18,6 +18,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { ShareModule } from './share/share.module';
+import { FormTemplateComponent } from './form-template/form-template.component';
+import { FormReactifComponent } from './form-reactif/form-reactif.component';
 
 //  définition de la constante pour les routes
 /**
@@ -38,6 +40,8 @@ import { ShareModule } from './share/share.module';
     SecondCompComponent,
     // PaginateComponent,
     AudioPlayerComponent,
+    FormTemplateComponent,
+    FormReactifComponent,
 
   ],
   imports: [
@@ -47,7 +51,9 @@ import { ShareModule } from './share/share.module';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule, 
-    ShareModule
+    ShareModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

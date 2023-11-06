@@ -1,1 +1,53 @@
-<p>add-album works!</p>
+<div class="container-sm">
+    <form [formGroup]="albumForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name :</label>
+            <input formControlName="name" type="text" class="form-control" id="name" placeholder="Name">
+            <div *ngIf="name?.invalid && name?.touched" class="alert alert-danger my-2">
+                <p *ngIf="name?.errors?.['required']">Ce champ est requis</p>
+                <p *ngIf="name?.errors?.['minlength']">Ce champ doit avoir une longueur minimale de {{name?.errors?.['minlength']?.requiredLength}} caractères.</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title">Title :</label>
+            <input formControlName="title" type="text" class="form-control" id="title" placeholder="Title">
+            <div *ngIf="title?.invalid && title?.touched" class="alert alert-danger my-2">
+                <p *ngIf="">{{name?.errors | json}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ref">Ref :</label>
+            <input formControlName="ref" type="text" class="form-control" id="ref" placeholder="Ref">
+            <div *ngIf="ref?.invalid && ref?.touched" class="alert alert-danger my-2">
+                <p *ngIf="ref?.errors?.['required']">Ce champ est requis</p>
+                <p *ngIf="ref?.errors?.['pattern']">Ce champ doit suivre le format d'expression régulière <strong><em>{{ref?.errors?.['pattern']?.requiredPattern}}</em></strong>. <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Errors/Bad_regexp_flag" target="_blank">En savoir plus sur les expressions égulières</a></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="duration">Duration :</label>
+            <input formControlName="duration" type="text" class="form-control" id="duration" placeholder="Duration seconde(s)">
+            <div *ngIf="duration?.invalid && duration?.touched" class="alert alert-danger my-2">
+                <p *ngIf="duration?.errors?.['required']">Ce champ est requis</p>
+                <p *ngIf="duration?.errors?.['pattern']">Ce champ doit suivre le format d'expression régulière <strong><em>{{duration?.errors?.['pattern']?.requiredPattern}}</em></strong>. <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Errors/Bad_regexp_flag" target="_blank">En savoir plus sur les expressions égulières</a></p>
+                <p *ngIf="duration?.errors?.['max']">La valeur saisie ne doit pas être supérieur à {{duration?.errors?.['max']?.max}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description :</label>
+            <textarea formControlName="description" class="form-control" id="description" placeholder="Description" cols="30" rows="5"></textarea>
+            <div *ngIf="description?.invalid && description?.touched" class="alert alert-danger my-2">
+                <p *ngIf="description?.errors?.['required']">Ce champ est requis</p>
+                <p *ngIf=""></p>
+            </div>
+        </div>
+            <div formArrayName="tags">
+                <h2>Etiquettes de l'albums</h2>
+                <button type="button" (click)="addTag()" class="btn btn-secondary m-2">+ Ajouter une étiquette</button>
+                <div *ngFor="let tag of tags.controls; let i = index" class="form-group m-2">
+                    <label for="tag-{{i}}">Tag : </label>
+                    <input [formControlName]="i" id="tag-{{i}}" type="text" class="form-control">
+                </div>
+            </div>
+        <button [disabled]="albumForm.invalid" type="submit" class="btn btn-primary my-2">Add</button>
+    </form>
+</div>
